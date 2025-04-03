@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { StyledLanguageButton, StyledLanguages } from "./languages.styles";
+
 export default function Languages() {
   const [selectedLanguage, setSelectedLanguage] = useState("PT");
 
@@ -14,7 +15,7 @@ export default function Languages() {
       {languages.map((lang) => (
         <StyledLanguageButton
           key={lang}
-          isActive={lang === selectedLanguage}
+          className={lang === selectedLanguage ? "active" : ""}
           onClick={() => handleSelectedLanguage(lang)}
         >
           {lang}
