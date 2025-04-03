@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import Image from "next/image";
 import styles from "./page.module.css";
 
@@ -91,5 +92,16 @@ export default function Home() {
         </a>
       </footer>
     </div>
+=======
+import Banners from "./components/Banner/banner";
+import CoursesCard from "./components/CourseList/courses";
+
+export default async function Home() {
+  return (
+    <main>
+      <Banners />
+      <CoursesCard />
+    </main>
+>>>>>>> develop
   );
 }
