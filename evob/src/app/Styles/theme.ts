@@ -24,7 +24,7 @@ const theme = {
                 default: "#000",
                 light: "#fff",
                 muted: "#666666",
-                charcoalGray: "#262525",
+                charcoalGray: "#252525",
                 slateGray: "#090909",
             },
             button: {
