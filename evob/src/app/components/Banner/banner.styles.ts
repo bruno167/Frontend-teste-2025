@@ -5,8 +5,12 @@ export const StyledBanner = styled.div`
   width: 100%;
   height: 460px;
 
-  @media (max-width: 1024px) {
-    height: 540px;
+  @media (min-width: 768px) {
+    height: 560px;
+  }
+
+  @media (min-width: 1024px) {
+    height: 560px;
   }
 `;
 

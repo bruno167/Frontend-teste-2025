@@ -28,14 +28,14 @@ export const StyledLanguageButton = styled.button`
     position: absolute;
     left: 0;
     bottom: -2px;
-    width: 100%; /* Sublinhado sempre ativo */
+    width: 100%;
     height: 2px;
     background-color: ${({ theme }) => theme.colors.base.purple};
     transition: width 0.3s ease-out;
   }
 
   &:hover::after {
-    width: 100%; /* Sublinhado no hover */
+    width: 100%;
   }
 
   &::after {

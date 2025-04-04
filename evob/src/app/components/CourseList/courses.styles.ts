@@ -22,17 +22,31 @@ export const CardContainer = styled.div`
   }
 
   @media screen and (min-width: 1440px) {
+    margin: 0 50px;
     grid-template-columns: repeat(4, 1fr);
   }
 `;
 
 export const CoursesHeader = styled.h2`
-  padding-left: 20px;
-  font-size: 32px;
-  line-height: 120%;
+  padding: 20px;
+  font-size: 24px;
+  width: 100%;
+  margin: 10px auto;
+  height: 28px;
+  line-height: 115%;
   font-family: ${({ theme }) => theme.fonts.inter};
-  font-weight: ${({ theme }) => theme.fontWeights.heading};
-  color: ${({ theme }) => theme.colors.base.black};
+  font-weight: ${({ theme }) => theme.fontWeights.body};
+  color: ${({ theme }) => theme.colors.text.charcoalGray};
+  transition: transform 0.2s ease-in-out;
+
+  @media screen and (min-width: 768px) {
+    font-size: 32px;
+    height: 37px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    margin: 0 50px 10px 50px;
+  }
 `;
 
 export const Card = styled.article`
@@ -46,18 +60,15 @@ export const Card = styled.article`
   transition: transform 0.2s ease-in-out;
 
   @media screen and (min-width: 768px) {
-    width: calc((100% - 10px) / 2);
     min-width: 245px;
   }
 
   @media screen and (min-width: 1024px) {
-    width: calc((100% - 20px) / 3);
     min-width: 245px;
   }
 
   @media screen and (min-width: 1440px) {
-    width: calc((100% - 30px) / 4);
-    min-width: 245px;
+    max-width: 315px;
   }
 `;
 
@@ -115,4 +126,72 @@ export const CardDescription = styled.p`
   color: ${({ theme }) => theme.colors.text.slateGray};
   margin: 0; 
   text-align: left; 
+`;
+
+export const CardFavoriteButton = styled.button`
+  display: flex;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  top: 16px;
+  left: 273px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+`;
+
+export const CardFavorite = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding: 5px;
+    gap: 16px;
+    isolation: isolate;
+    width: 100%;
+    height: 100%;
+`;
+
+export const CardTag = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 4px 12px;
+    gap: 12px;
+    height: 22px;
+    background: ${({ theme }) => theme.colors.status.label};
+
+`;
+
+export const CardHighlight = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px;
+    gap: 8px;
+    width: 22px;
+    height: 22px;
+    background: ${({ theme }) => theme.colors.status.highlight};
+`;
+
+export const CardTagText = styled.div`
+  font-size: 12px;
+  line-height: 115%;
+  font-family: ${({ theme }) => theme.fonts.quattrocento};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  color: ${({ theme }) => theme.colors.text.light};
+  text-align: center;
+  text-transform: uppercase;
+`;
+
+export const CardTagContainer = styled.div`
+  display: flex;
+  align-items: center;
+  align-items: flex-start;
+  margin: 10px;
+  gap: 8px;
+  width: 90%;
+  height: 22px;
 `;

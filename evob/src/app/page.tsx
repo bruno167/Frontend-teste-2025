@@ -5,7 +5,9 @@ export default async function Home() {
   return (
     <main>
       <Banners />
-      <CoursesCard />
+      <div>
+        <CoursesCard />
+      </div>
     </main>
   );
 }
