@@ -1,5 +1,6 @@
 import Banners from "./components/Banner/banner";
 import CoursesCard from "./components/CourseList/courses";
+import FavoriteCourses from "./components/FavoriteCourses/favorite-courses";
 
 export default async function Home() {
   return (
@@ -7,6 +8,7 @@ export default async function Home() {
       <Banners />
       <div>
         <CoursesCard />
+        <FavoriteCourses />
       </div>
     </main>
   );

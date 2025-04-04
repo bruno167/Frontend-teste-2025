@@ -64,11 +64,12 @@ export const Card = styled.article`
   }
 
   @media screen and (min-width: 1024px) {
-    min-width: 245px;
+    min-width: 325px;
   }
 
   @media screen and (min-width: 1440px) {
-    max-width: 315px;
+    min-width: 325px;
+    max-width: 350px;
   }
 `;
 

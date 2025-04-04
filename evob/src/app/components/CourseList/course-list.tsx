@@ -20,16 +20,26 @@ import {
 import { CardButton } from "../Button/button.styles";
 import Heart from "../Icons/Heart";
 import Fire from "../Icons/Fire";
-import HeartFill from "../Icons/Heart-fill";
+import { useEffect, useState } from "react";
 
 interface CourseListProps {
   courses: Course[];
 }
 
 export default function Courses({ courses }: CourseListProps) {
-  if (!courses || courses.length === 0) {
-    return <div>Nenhum curso disponível no momento.</div>;
-  }
+  const [cachedCourses, setCachedCourses] = useState<Course[]>([]);
+
+  useEffect(() => {
+    if (courses.length > 0) {
+      localStorage.setItem("cachedCourses", JSON.stringify(courses));
+      setCachedCourses(courses);
+    } else {
+      const cached = localStorage.getItem("cachedCourses");
+      if (cached) {
+        setCachedCourses(JSON.parse(cached));
+      }
+    }
+  }, [courses]);
 
   function useCourseTags(courseTypes: {
     live: boolean;
@@ -47,12 +57,12 @@ export default function Courses({ courses }: CourseListProps) {
     <>
       <CoursesHeader>Meus Cursos</CoursesHeader>
       <CardContainer>
-        {courses.map((course) => (
+        {cachedCourses.map((course) => (
           <Card key={course.id}>
             <CardImage thumbnail={course.thumbnail}>
               <CardFavorite>
                 <CardFavoriteButton>
-                  <HeartFill />
+                  <Heart />
                 </CardFavoriteButton>
               </CardFavorite>
               {Object.values(course.settings.course_types).some(
