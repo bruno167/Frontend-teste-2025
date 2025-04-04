@@ -31,6 +31,7 @@ declare module "styled-components" {
         primary: string;
         secondary: string;
         hover: string;
+        border: string;
       };
       status: {
         label: string;

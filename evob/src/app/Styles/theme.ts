@@ -19,6 +19,7 @@ const theme = {
             secondary: "#e3d914",
             highlight: "#e33f52",
             background: "#f1f4fb",
+
         },
             text: {
                 default: "#000",
@@ -26,11 +27,14 @@ const theme = {
                 muted: "#666666",
                 charcoalGray: "#252525",
                 slateGray: "#090909",
+                lightGray: "#292D32"
             },
             button: {
                 primary: "#792bf9", 
                 secondary: "#000",
-                hover: "#e3d914", 
+                hover: "#e3d914",
+                border: "#E4E0E0",
+
             },
             status: {
                 label: "#383838",
