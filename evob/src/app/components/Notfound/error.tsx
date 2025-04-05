@@ -4,7 +4,7 @@ import {
   ErrorDescription,
   ErrorStyle,
   ErrorText,
-} from "./error.style";
+} from "./error.styles";
 import { useRouter } from "next/navigation";
 
 export default function Error() {
