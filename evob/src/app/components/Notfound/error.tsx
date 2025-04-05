@@ -5,12 +5,6 @@ import {
   ErrorStyle,
   ErrorText,
 } from "./error.style";
-import {
-  PrimaryButton,
-  SecondaryButton,
-  TerdiaryButton,
-} from "../Button/button.styles";
-import Button from "../Button/button";
 
 export default function Error() {
   return (
@@ -25,7 +19,9 @@ export default function Error() {
       <ErrorDescription>
         Parece que você entrou em uma dimensão desconhecida.
       </ErrorDescription>
-      <ErrorButton>Voltar para o início</ErrorButton>
+      <ErrorButton onClick={() => (window.location.href = "/")}>
+        Voltar para o início
+      </ErrorButton>
     </ErrorStyle>
   );
 }
