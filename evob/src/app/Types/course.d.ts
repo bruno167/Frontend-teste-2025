@@ -65,6 +65,7 @@ export type Course = {
   offer_currency: string | null;
   lesson_types: string[];
   isFavorite: boolean;
+  favoriteOrder?: number;
 };
 
 export type CoursesResponse = {

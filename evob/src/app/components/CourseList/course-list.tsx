@@ -2,27 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { Course } from "../../../app/Types/course";
-import {
-  Card,
-  CardContainer,
-  CardContent,
-  CardDescription,
-  CardFavorite,
-  CardHighlight,
-  CardImage,
-  CardTag,
-  CardTagContainer,
-  CardTagText,
-  CardTextContainer,
-  CardTitle,
-  CoursesHeader,
-} from "./courses.styles";
-import { CardButton } from "../Button/button.styles";
-import { FavoriteButton } from "../FavoriteButton/favorite-button";
+import { CoursesHeader, CardContainer } from "./courses.styles";
+import CourseCard from "./CourseCard/course-card";
 import FavoriteCourses from "../FavoriteCourses/favorite-courses";
-import { FavoriteSection } from "../FavoriteCourses/favorite-courses.style";
-import Fire from "../Icons/Fire";
-
 interface CourseListProps {
   courses: Course[];
 }
@@ -40,14 +22,20 @@ export default function Courses({ courses }: CourseListProps) {
     }
   }, [courses]);
 
-  // Alternar o estado de favorito
+  const [favoriteCourses, setFavoriteCourses] = useState<Course[]>([]);
   const toggleFavorite = (courseId: number) => {
-    const updatedCourses = cachedCourses.map((course) =>
-      course.id === courseId
-        ? { ...course, isFavorite: !course.isFavorite }
-        : course
+    const course = cachedCourses.find((c) => c.id === courseId);
+    if (!course) return;
+    if (favoriteCourses.some((fav) => fav.id === courseId)) {
+      setFavoriteCourses((prev) =>
+        prev.filter((favCourse) => favCourse.id !== courseId)
+      );
+    } else {
+      setFavoriteCourses((prev) => [...prev, { ...course, isFavorite: true }]);
+    }
+    const updatedCourses = cachedCourses.map((c) =>
+      c.id === courseId ? { ...c, isFavorite: !c.isFavorite } : c
     );
-
     setCachedCourses(updatedCourses);
     localStorage.setItem("cachedCourses", JSON.stringify(updatedCourses));
   };
@@ -57,55 +45,17 @@ export default function Courses({ courses }: CourseListProps) {
       <CoursesHeader>Meus Cursos</CoursesHeader>
       <CardContainer>
         {cachedCourses.map((course) => (
-          <Card key={course.id}>
-            <CardImage thumbnail={course.thumbnail}>
-              <CardFavorite>
-                <FavoriteButton
-                  isFavorite={course.isFavorite || false}
-                  toggleFavorite={() => toggleFavorite(course.id)}
-                />
-              </CardFavorite>
-              {Object.values(course.settings.course_types).some(
-                (type) => type
-              ) && (
-                <CardTagContainer>
-                  <CardHighlight>
-                    <Fire />
-                  </CardHighlight>
-                  <CardTag>
-                    {(
-                      ["live", "online"] as Array<
-                        keyof typeof course.settings.course_types
-                      >
-                    ).map((type) =>
-                      course.settings.course_types[type] ? (
-                        <CardTagText key={type}>
-                          {type === "live" && "Ao vivo"}
-                          {type === "online" && "Online"}
-                          {type === "presential" && "Presencial"}
-                        </CardTagText>
-                      ) : null
-                    )}
-                  </CardTag>
-                </CardTagContainer>
-              )}
-            </CardImage>
-            <CardContent>
-              <CardTextContainer>
-                <CardTitle>{course.title}</CardTitle>
-                <CardDescription>{course.short_description}</CardDescription>
-              </CardTextContainer>
-              <CardButton>Acessar</CardButton>
-            </CardContent>
-          </Card>
+          <CourseCard
+            key={course.id}
+            course={course}
+            toggleFavorite={toggleFavorite}
+          />
         ))}
       </CardContainer>
-      <FavoriteSection>
-        <FavoriteCourses
-          courses={cachedCourses}
-          toggleFavorite={toggleFavorite}
-        />
-      </FavoriteSection>
+      <FavoriteCourses
+        courses={favoriteCourses}
+        toggleFavorite={toggleFavorite}
+      />
     </>
   );
 }
