@@ -5,8 +5,11 @@ import {
   ErrorStyle,
   ErrorText,
 } from "./error.style";
+import { useRouter } from "next/navigation";
 
 export default function Error() {
+  const router = useRouter();
+
   return (
     <ErrorStyle>
       <Image
@@ -19,7 +22,7 @@ export default function Error() {
       <ErrorDescription>
         Parece que você entrou em uma dimensão desconhecida.
       </ErrorDescription>
-      <ErrorButton onClick={() => (window.location.href = "/")}>
+      <ErrorButton onClick={() => router.push("/")}>
         Voltar para o início
       </ErrorButton>
     </ErrorStyle>
