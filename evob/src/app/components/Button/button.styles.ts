@@ -91,7 +91,6 @@ export const CardButton = styled.button`
     justify-content: center;
     align-self: stretch;
     padding: 12px 60px;
-    margin: 20pxauto;
     gap: 10px;
     width: 100%;
     height: 48px;
@@ -104,4 +103,9 @@ export const CardButton = styled.button`
     color: ${({ theme }) => theme.colors.text.light};
     border: none;
     cursor: pointer;
+
+    &:hover {
+        background:${({ theme }) => theme.colors.button.hover};
+        transition: 0.3s ease-in-out;
+    }
 `;

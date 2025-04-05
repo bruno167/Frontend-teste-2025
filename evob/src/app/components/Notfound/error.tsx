@@ -1,5 +1,16 @@
 import Image from "next/image";
-import { ErrorStyle } from "./error.style";
+import {
+  ErrorButton,
+  ErrorDescription,
+  ErrorStyle,
+  ErrorText,
+} from "./error.style";
+import {
+  PrimaryButton,
+  SecondaryButton,
+  TerdiaryButton,
+} from "../Button/button.styles";
+import Button from "../Button/button";
 
 export default function Error() {
   return (
@@ -7,12 +18,14 @@ export default function Error() {
       <Image
         src="/404.png"
         alt="Página não encontrada"
-        width={300}
-        height={300}
-        className="w-1/2 h-auto mb-4"
+        width={350}
+        height={350}
       />
-      <h1>Página não encontrada</h1>
-      <p>A página que voc&ecirc; procurou não foi encontrada.</p>
+      <ErrorText>Página não encontrada</ErrorText>
+      <ErrorDescription>
+        Parece que você entrou em uma dimensão desconhecida.
+      </ErrorDescription>
+      <ErrorButton>Voltar para o início</ErrorButton>
     </ErrorStyle>
   );
 }
