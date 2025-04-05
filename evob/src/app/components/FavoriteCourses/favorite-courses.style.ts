@@ -4,13 +4,12 @@ export const FavoriteSection = styled.section`
     display: flex;
     flex-direction: column;
     min-width: 375px;
-    height: 100%;
+    height: auto;
     gap: 40px; 
 
     @media screen and (min-width: 768px) {
         width: 100%;
-        height: 310px;
-        padding: 48px 60px;
+        height: auto;
         gap: 40px;
     }
 `;

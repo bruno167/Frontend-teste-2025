@@ -64,6 +64,7 @@ export type Course = {
   lowest_offer: LowestOffer;
   offer_currency: string | null;
   lesson_types: string[];
+  isFavorite: boolean;
 };
 
 export type CoursesResponse = {

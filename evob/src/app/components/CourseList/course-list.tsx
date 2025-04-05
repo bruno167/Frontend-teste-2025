@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Course } from "../../../app/Types/course";
 import {
   Card,
@@ -7,7 +8,6 @@ import {
   CardContent,
   CardDescription,
   CardFavorite,
-  CardFavoriteButton,
   CardHighlight,
   CardImage,
   CardTag,
@@ -18,9 +18,10 @@ import {
   CoursesHeader,
 } from "./courses.styles";
 import { CardButton } from "../Button/button.styles";
-import Heart from "../Icons/Heart";
+import { FavoriteButton } from "../FavoriteButton/favorite-button";
+import FavoriteCourses from "../FavoriteCourses/favorite-courses";
+import { FavoriteSection } from "../FavoriteCourses/favorite-courses.style";
 import Fire from "../Icons/Fire";
-import { useEffect, useState } from "react";
 
 interface CourseListProps {
   courses: Course[];
@@ -30,28 +31,26 @@ export default function Courses({ courses }: CourseListProps) {
   const [cachedCourses, setCachedCourses] = useState<Course[]>([]);
 
   useEffect(() => {
-    if (courses.length > 0) {
+    const cached = localStorage.getItem("cachedCourses");
+    if (cached) {
+      setCachedCourses(JSON.parse(cached));
+    } else if (courses.length > 0) {
       localStorage.setItem("cachedCourses", JSON.stringify(courses));
       setCachedCourses(courses);
-    } else {
-      const cached = localStorage.getItem("cachedCourses");
-      if (cached) {
-        setCachedCourses(JSON.parse(cached));
-      }
     }
   }, [courses]);
 
-  function useCourseTags(courseTypes: {
-    live: boolean;
-    online: boolean;
-    presential: boolean;
-  }) {
-    const tags = [
-      { type: "live", label: "Ao vivo" },
-      { type: "online", label: "Online" },
-      { type: "presential", label: "Presencial" },
-    ];
-  }
+  // Alternar o estado de favorito
+  const toggleFavorite = (courseId: number) => {
+    const updatedCourses = cachedCourses.map((course) =>
+      course.id === courseId
+        ? { ...course, isFavorite: !course.isFavorite }
+        : course
+    );
+
+    setCachedCourses(updatedCourses);
+    localStorage.setItem("cachedCourses", JSON.stringify(updatedCourses));
+  };
 
   return (
     <>
@@ -61,9 +60,10 @@ export default function Courses({ courses }: CourseListProps) {
           <Card key={course.id}>
             <CardImage thumbnail={course.thumbnail}>
               <CardFavorite>
-                <CardFavoriteButton>
-                  <Heart />
-                </CardFavoriteButton>
+                <FavoriteButton
+                  isFavorite={course.isFavorite || false}
+                  toggleFavorite={() => toggleFavorite(course.id)}
+                />
               </CardFavorite>
               {Object.values(course.settings.course_types).some(
                 (type) => type
@@ -100,6 +100,12 @@ export default function Courses({ courses }: CourseListProps) {
           </Card>
         ))}
       </CardContainer>
+      <FavoriteSection>
+        <FavoriteCourses
+          courses={cachedCourses}
+          toggleFavorite={toggleFavorite}
+        />
+      </FavoriteSection>
     </>
   );
 }
