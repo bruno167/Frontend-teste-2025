@@ -32,7 +32,6 @@ export const Alert: React.FC<AlertProps> = ({
   return (
     <StyledAlert type={type}>
       <p>{message}</p>
-      <CloseButton onClick={() => setIsVisible(false)}>✕</CloseButton>
     </StyledAlert>
   );
 };
