@@ -26,6 +26,7 @@ declare module "styled-components" {
         muted: string;
         charcoalGray: string;
         slateGray: string;
+        lightGray: string;
       };
       button: {
         primary: string;
