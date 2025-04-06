@@ -18,6 +18,8 @@ import { CardButton } from "../../Button/button.styles";
 import { FavoriteButton } from "../../FavoriteButton/favorite-button";
 import Fire from "../../Icons/Fire";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Alert } from "../../Alerts/alert";
 
 interface CourseCardProps {
   course: Course;
@@ -29,20 +31,41 @@ export default function CourseCard({
   toggleFavorite,
 }: CourseCardProps) {
   const router = useRouter();
+  const [alertMessage, setAlertMessage] = useState<string | null>(null);
 
   const handleClick = () => {
     router.push(`/courses/${course.slug}`);
   };
 
+  const handleFavoriteClick = () => {
+    if (toggleFavorite) {
+      toggleFavorite(course);
+      setAlertMessage(
+        course.isFavorite
+          ? "Curso removido dos favoritos."
+          : "Curso adicionado aos favoritos!"
+      );
+
+      setTimeout(() => {
+        setAlertMessage(null);
+      }, 2000);
+    }
+  };
+
   return (
     <Card>
       <CardImage thumbnail={course.thumbnail}>
+        {alertMessage && (
+          <Alert
+            message={alertMessage}
+            type="success"
+            onClose={() => setAlertMessage(null)}
+          />
+        )}
         <CardFavorite>
           <FavoriteButton
             isFavorite={course.isFavorite}
-            toggleFavorite={
-              toggleFavorite ? () => toggleFavorite(course) : () => {}
-            }
+            toggleFavorite={handleFavoriteClick}
           />
         </CardFavorite>
         {Object.values(course.settings.course_types).some((type) => type) && (

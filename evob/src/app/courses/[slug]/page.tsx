@@ -1,4 +1,5 @@
 import CourseDetails from "@/app/components/CourseList/CoursePage/courses-page";
+import ShareButton from "@/app/components/Shared/share-button";
 import { getCourseDetails } from "@/Services/courses-slug";
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
@@ -47,5 +48,10 @@ export default async function CoursePage({ params }: CourseProps) {
     }
   }
 
-  return <>{course && <CourseDetails course={course} />}</>;
+  return (
+    <>
+      {course && <CourseDetails course={course} />}
+      <ShareButton />
+    </>
+  );
 }

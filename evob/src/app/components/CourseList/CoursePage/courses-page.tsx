@@ -1,5 +1,6 @@
 "use client";
 
+import DOMPurify from "dompurify";
 import { useFavorites } from "@/contexts/FavoritesContext"; // Consome o contexto
 import { Course } from "@/app/Types/course";
 import {
@@ -14,6 +15,8 @@ import {
 } from "./couses-page.style";
 import HeartFill from "../../Icons/Heart-fill";
 import Heart from "../../Icons/Heart";
+import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 
 interface CourseDetailsProps {
   course: Course;
@@ -21,8 +24,12 @@ interface CourseDetailsProps {
 
 export default function CourseDetails({ course }: CourseDetailsProps) {
   const { favorites, toggleFavorite } = useFavorites();
-
   const isFavorite = favorites.some((fav) => fav.id === course.id);
+  const [cleanHTML, setCleanHTML] = useState("");
+
+  useEffect(() => {
+    setCleanHTML(DOMPurify.sanitize(course.long_description));
+  }, [course.long_description]);
 
   return (
     <StyledCoursePage>
@@ -45,7 +52,7 @@ export default function CourseDetails({ course }: CourseDetailsProps) {
           <DetailsTitle>{course.title}</DetailsTitle>
           <DetailsDescription
             suppressHydrationWarning
-            dangerouslySetInnerHTML={{ __html: course.long_description }}
+            dangerouslySetInnerHTML={{ __html: cleanHTML }}
           />
         </DetailsContainer>
       </MenuContainer>

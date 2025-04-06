@@ -48,6 +48,7 @@ export const DetailsContainer = styled.section`
 
     @media (min-width: 768px) {
         height: 346px;
+        width: 100%;
         padding: 48px 60px;
         flex-direction: column;
         align-items: flex-start;
@@ -60,16 +61,15 @@ export const DetailsContainer = styled.section`
 export const ButtonContainer = styled.div`
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
     gap: 5px;
     width: 100%;
     padding: 24px 24px 0 24px;
 
     @media (min-width: 768px) {
-        width: 100%;
+        height: 295px;
         padding: 0;
-        align-items: flex-end;
+        justify-content: center;
+        order: 1;
     } 
 `;
 
