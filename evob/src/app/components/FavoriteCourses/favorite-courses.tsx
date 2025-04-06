@@ -1,6 +1,6 @@
 "use client";
 
-import { Course } from "../../../app/Types/course";
+import { useFavorites } from "@/contexts/FavoritesContext";
 import {
   FavoriteContainer,
   FavoriteMessage,
@@ -11,26 +11,23 @@ import HeartSearch from "../Icons/Heart-search";
 import { CardContainer, CoursesHeader } from "../CourseList/courses.styles";
 import CourseCard from "../CourseList/CourseCard/course-card";
 
-interface FavoriteCoursesProps {
-  courses: Course[];
-  toggleFavorite: (courseId: number) => void;
-}
+export default function FavoriteCourses() {
+  const { favorites, toggleFavorite } = useFavorites();
 
-export default function FavoriteCourses({
-  courses,
-  toggleFavorite,
-}: FavoriteCoursesProps) {
   return (
     <>
       <CoursesHeader>Meus Favoritos</CoursesHeader>
       <FavoriteSection>
-        {courses.length > 0 ? (
+        {favorites.length > 0 ? (
           <CardContainer>
-            {courses.map((course) => (
+            {favorites.map((course) => (
               <CourseCard
                 key={course.id}
-                course={course}
-                toggleFavorite={toggleFavorite}
+                course={{
+                  ...course,
+                  isFavorite: true,
+                }}
+                toggleFavorite={() => toggleFavorite(course)}
               />
             ))}
           </CardContainer>

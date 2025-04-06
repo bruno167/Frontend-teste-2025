@@ -129,7 +129,7 @@ export const CardDescription = styled.p`
   text-align: left; 
 `;
 
-export const CardFavoriteButton = styled.button`
+export const CardFavoriteButton = styled.div`
   display: flex;
   justify-content: center;
   padding: 8px;

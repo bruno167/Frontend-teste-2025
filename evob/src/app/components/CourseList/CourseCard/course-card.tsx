@@ -21,7 +21,7 @@ import { useRouter } from "next/navigation";
 
 interface CourseCardProps {
   course: Course;
-  toggleFavorite?: (courseId: number) => void;
+  toggleFavorite?: (courseId: Course) => void;
 }
 
 export default function CourseCard({
@@ -31,7 +31,7 @@ export default function CourseCard({
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(`/course/${course.id}`);
+    router.push(`/courses/${course.slug}`);
   };
 
   return (
@@ -39,9 +39,9 @@ export default function CourseCard({
       <CardImage thumbnail={course.thumbnail}>
         <CardFavorite>
           <FavoriteButton
-            isFavorite={course.isFavorite || false}
+            isFavorite={course.isFavorite}
             toggleFavorite={
-              toggleFavorite ? () => toggleFavorite(course.id) : () => {}
+              toggleFavorite ? () => toggleFavorite(course) : () => {}
             }
           />
         </CardFavorite>

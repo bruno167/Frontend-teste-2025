@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/app/Styles/ThemeProvider";
 import StyledComponentsRegistry from "./registry";
 import Header from "./components/Header/header";
 import Footer from "./components/Footer/footer";
+import { FavoritesProvider } from "@/contexts/FavoritesContext";
 
 export const metadata: Metadata = {
   title: "Evob",
@@ -21,7 +22,7 @@ export default function RootLayout({
         <StyledComponentsRegistry>
           <ThemeProvider>
             <Header />
-            {children}
+            <FavoritesProvider>{children}</FavoritesProvider>
             <Footer />
           </ThemeProvider>
         </StyledComponentsRegistry>
