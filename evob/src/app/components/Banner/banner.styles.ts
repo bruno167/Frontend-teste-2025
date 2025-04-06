@@ -26,6 +26,7 @@ export const StyledBannerArea = styled.div.withConfig({
   width: 100%;
   height: 460px;
   position: relative;
+  transition: 0.3s ease-in-out;
 
   @media (min-width: 768px) {
     background-image: ${(props) =>
@@ -50,6 +51,7 @@ export const StyledBannerTitle = styled.h1`
   font-family: ${({ theme}) => theme.fonts.inter};
   font-weight: ${({ theme}) => theme.fontWeights.bold};
   color:${({ theme}) => theme.colors.text.light};
+  transition: 0.3s ease-in-out;
 
   @media screen and (min-width: 1024px) {
         font-size: 52px;
@@ -69,6 +71,7 @@ export const HighlightArea = styled.div`
     height: 540px;
     background: ${({ theme }) => theme.colors.base.purple};
     clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%);
+    transition: 0.2s ease-in-out;
   }
 
 `;
